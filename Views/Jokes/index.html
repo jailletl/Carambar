@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../images/icone_Carambar.jpg">
+    <title>Carambar Jokes</title>
+</head>
+<body>
+    <h1>Carambar Jokes</h1> <!-- Titre de la page -->
+    <div class="container">
+        <button id="jokeButton">Get a Random Joke</button> <!-- Bouton pour obtenir une blague aléatoire -->
+        <p id="jokeContent"></p> <!-- Contenu de la blague obtenu -->
+    </div>
+
+    <script>
+        document.getElementById('jokeButton').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/blagues/random'); // Effectue une requête pour obtenir une blague aléatoire depuis l'API
+                const joke = await response.json(); // Convertit la réponse en JSON
+                const jokeContent = joke.content; // Récupère le contenu de la blague
+                
+                // Formate la blague pour afficher correctement la question et la réponse
+                const firstIndex = jokeContent.indexOf('-');
+                let formattedJoke;
+                if (firstIndex !== -1) {
+                    const random_Joke = jokeContent.substring(0, firstIndex).trim();
+                    const random_Response = jokeContent.substring(firstIndex + 1).trim();
+                    formattedJoke = `${random_Joke}<br>Réponse : ${random_Response}`;
+                } else {
+                    formattedJoke = jokeContent;
+                }
+
+                // Affiche la blague dans le paragraphe
+                document.getElementById('jokeContent').innerHTML = formattedJoke;
+            } catch (error) {
+                console.error('Error fetching joke:', error);
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: #fff200;
+            color: #333;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        h1 {
+            color: #d62828;
+            margin-top: 50px;
+            font-size: 3em;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: #f77f00;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #d62828;
+            transform: scale(1.05);
+        }
+
+        #jokeContent {
+            font-size: 1.5em;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 3px solid #f77f00;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+
+            #jokeContent {
+                font-size: 1em;
+                padding: 15px;
+            }
+        }
+    </style>
+</body>
+</html>
