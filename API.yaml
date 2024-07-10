@@ -1,0 +1,70 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://carambar-n3r8.onrender.com'
+info:
+  title: Carambar Jokes API
+  description: API pour gérer les blagues de Carambar
+  version: 1.0.0
+paths:
+  /blagues:
+    get:
+      summary: Récupère toutes les blagues
+      responses:
+        '200':
+          description: Liste de toutes les blagues
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Joke'
+    post:
+      summary: Ajoute une nouvelle blague
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Joke'
+      responses:
+        '201':
+          description: Blague ajoutée
+        '400':
+          description: Erreur de validation
+  /blagues/{id}:
+    get:
+      summary: Récupère une blague par son ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Blague correspondante à l'ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Joke'
+        '404':
+          description: Blague non trouvée
+  /blagues/random:
+    get:
+      summary: Récupère une blague aléatoire
+      responses:
+        '200':
+          description: Blague aléatoire
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Joke'
+components:
+  schemas:
+    Joke:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string

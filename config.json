@@ -1,0 +1,6 @@
+{
+    "swagger": {
+        "outputFile": "./swagger_output.json",
+        "endpointsFiles": ["./Controllers/JokesController.cs"]
+    }
+}
