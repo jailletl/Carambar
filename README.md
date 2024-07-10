@@ -11,5 +11,5 @@ Puis exécuter : "node app.js" (Démarrer le serveur) ou "npm run swagger" (Gén
 
 ### Liens utiles
 
-- Repo GitHub de l'API : https://github.com/jailletl/Carambar/API.yaml
+- Repo GitHub de l'API : https://github.com/jailletl/Carambar/blob/main/API.yaml
 - Documentation Swagger : https://app.swaggerhub.com/apis/JAILLETLUDIVINELGM/Carambar/1.0.0#/Joke
